@@ -28,8 +28,7 @@ def anime_watching():
     return 'Hello World!'
 
 
-# @app.route('/blog')
-@app.route('/')
+@app.route('/blog')
 def blog():
     return render_template('blog.html')
 
@@ -51,7 +50,7 @@ def login():
 
 @app.route('/signup')
 def signup():
-    return 'Hello World!'
+    return render_template('signup.html')
 
 
 if __name__ == '__main__':
