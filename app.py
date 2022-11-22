@@ -46,7 +46,7 @@ def categories():
 
 @app.route('/login')
 def login():
-    return 'Hello World!'
+    return render_template('login.html')
 
 
 @app.route('/signup')
