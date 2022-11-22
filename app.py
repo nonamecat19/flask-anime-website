@@ -13,7 +13,7 @@ app = Flask(__name__)
 #     content = db.Column(db.String(200), nullable=False)
 #
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -28,9 +28,10 @@ def anime_watching():
     return 'Hello World!'
 
 
-@app.route('/blog')
+# @app.route('/blog')
+@app.route('/')
 def blog():
-    return 'Hello World!'
+    return render_template('blog.html')
 
 
 @app.route('/blog-details')
