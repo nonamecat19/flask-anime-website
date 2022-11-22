@@ -1,35 +1,11 @@
-<!DOCTYPE html>
-<html lang="zxx">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Anime Template">
-    <meta name="keywords" content="Anime, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+{% block head %}
+    <title>Деталі аніме</title>
+{% endblock %}
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+{% block body %}
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- Header Section Begin -->
     <header class="header">
@@ -38,7 +14,7 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="./index.html">
-                            <img src="img/logo.png" alt="">
+                            <img src="{{url_for('static', filename='img/logo.png')}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -97,7 +73,7 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="img/anime/details-pic.jpg">
+                        <div class="anime__details__pic set-bg" data-setbg="{{url_for('static', filename='img/anime/details-pic.jpg')}}">
                             <div class="comment"><i class="fa fa-comments"></i> 11</div>
                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
                         </div>
@@ -161,7 +137,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-1.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
@@ -171,7 +147,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-2.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-2.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -180,7 +156,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-3.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-3.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -189,7 +165,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-4.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-4.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Chris Curry - <span>1 Hour ago</span></h6>
@@ -199,7 +175,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-5.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-5.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Lewis Mann - <span>5 Hour ago</span></h6>
@@ -208,7 +184,7 @@
                             </div>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-6.jpg" alt="">
+                                    <img src="{{url_for('static', filename='img/anime/review-6.jpg')}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
                                     <h6>Louis Tyler - <span>20 Hour ago</span></h6>
@@ -231,7 +207,7 @@
                             <div class="section-title">
                                 <h5>you might like...</h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-1.jpg">
+                            <div class="product__sidebar__view__item set-bg" data-setbg="{{url_for('static', filename='img/sidebar/tv-1.jpg')}}">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5><a href="#">Boruto: Naruto next generations</a></h5>
@@ -267,7 +243,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="./index.html"><img src="{{url_for('static', filename='img/logo.png')}}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -280,12 +256,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-
-                      </div>
                   </div>
               </div>
           </footer>
@@ -302,16 +272,4 @@
         </div>
         <!-- Search model end -->
 
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/player.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
-
-    </body>
-
-    </html>
+{% endblock %}

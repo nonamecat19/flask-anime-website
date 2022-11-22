@@ -20,7 +20,7 @@ def index():
 
 @app.route('/anime-details')
 def anime_details():
-    return 'Hello World!'
+    return render_template('anime-details.html')
 
 
 @app.route('/anime-watching')
