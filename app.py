@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -95,6 +95,10 @@ def categories():
             sections.append([category, titles])
     return render_template('categories.html', sections=sections)
 
+@app.route('/contacts')
+def blog():
+    return render_template('blog-details.html')
+
 
 @app.route('/login')
 def login():
@@ -108,12 +112,60 @@ def signup():
 
 @app.route('/admin-panel')
 def admin_panel():
-    return render_template('admin-panel.html')
+    titles = Title.query.all()
+    return render_template('admin-panel.html', titles=titles)
 
+@app.route('/admin-panel/add-title', methods=["POST", "GET"])
+def title_adding():
+    categories = Category.query.all()
+    if request.method == "POST":
+        new_title = Title(name=request.form['title-name'], original_name=request.form['title-original_name'],
+                          description=request.form['title-description'], image_name=request.form['title-image_name'],
+                          type=request.form['title-type'], studio=request.form['title-studio'],
+                          category_id=request.form.get('title-category'), age_restriction=request.form['title-age_restriction'],
+                          movie_length=request.form['title-movie_length'], star_count=request.form['title-star_count'],
+                          genres=request.form['title-genres'], status=request.form['title-status'])
+        try:
+            db.session.add(new_title)
+            db.session.commit()
+            return redirect("/admin-panel")
+        except Exception as e:
+            return str(e)
+    return render_template('add-title.html', categories=categories)
 
-@app.route('/contacts')
-def blog():
-    return render_template('blog-details.html')
+@app.route('/admin-panel/delete-title/<int:id>')
+def title_deleting(id):
+    title = Title.query.get_or_404(id)
+    try:
+        db.session.delete(title)
+        db.session.commit()
+        return redirect("/admin-panel")
+    except Exception as ex:
+        return str(e)
+
+@app.route('/admin-panel/update-title/<int:id>', methods=["POST", "GET"])
+def title_updating(id):
+    categories = Category.query.all()
+    title = Title.query.get_or_404(id)
+    if request.method == "POST":
+        title.name = request.form['title-name']
+        title.original_name = request.form['title-original_name']
+        title.description = request.form['title-description']
+        title.image_name = request.form['title-image_name']
+        title.type = request.form['title-type']
+        title.studio = request.form['title-studio']
+        title.category_id = request.form.get('title-category')
+        title.age_restriction = request.form['title-age_restriction']
+        title.movie_length = request.form['title-movie_length']
+        title.star_count = request.form['title-star_count']
+        title.genres = request.form['title-genres']
+        title.status = request.form['title-status']
+        try:
+            db.session.commit()
+            return redirect("/admin-panel")
+        except Exception as ex:
+            return str(ex)
+    return render_template('update-title.html', categories=categories, title=title)
 # --> #
 
 if __name__ == '__main__':

@@ -15,8 +15,8 @@ db.session.add(Title(name="Атака титанів", original_name="shingeki n
 db.session.add(Title(name="Сао", original_name="sword art online", description="Ipsum", image_name="popular-3.jpg",
                 type="серіал", studio="Mappa", category_id=2, age_restriction=16, movie_length="20хв/серія",
                 star_count=4, genres="фантастика, бойовик, пригоди", status="онгоїнг"))
-db.session.add(Title(name="Обіцяний Неверленд", original_name="the promised neverlend", description="Ipsum", image_name="popular-3.jpg",
-                type="серіал", studio="Lis", category_id=3, age_restriction=16, movie_length="20хв/серія",
-                star_count=4, genres="пригоди", status="онгоїнг"))
+db.session.add(Title(name="Обіцяний Неверленд", original_name="the promised neverlend", description="Ipsum",
+                     image_name="popular-3.jpg", type="серіал", studio="Lis", category_id=3, age_restriction=16,
+                     movie_length="20хв/серія", star_count=4, genres="пригоди", status="онгоїнг"))
 
 db.session.commit()

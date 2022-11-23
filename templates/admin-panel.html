@@ -21,47 +21,34 @@
 
     <div class="container">
         <div class="row" id="admin_page">
-            <div class="title col-6">
-                <h4>Додати аніме</h4>
-                <label for="title-name">Назва</label>
-                <input type="text" id="title-name" name="title-name">
 
-                <label for="title-description">Опис</label>
-                <textarea name="title-description" id="title-description" rows="2"></textarea>
-
-                <label for="title-image">Назва картинки</label>
-                <input type="text" id="title-image" name="title-image">
-
-                <label for="title-type">Тип</label>
-                <input type="text" id="title-type" name="title-type">
-
-                <label for="title-studio">Студія</label>
-                <input type="text" id="title-studio" name="title-studio">
-
-                <label for="title-date_of_creating">Дата створеня</label>
-                <input type="text" id="title-date_of_creating" name="title-date_of_creating">
-
-                <label for="title-status">Статус</label>
-                <input type="text" id="title-status" name="title-status">
-
-                <label for="title-mark">Оцінка</label>
-                <input type="text" id="title-mark" name="title-mark">
-
-                <label for="title-quality">Якість</label>
-                <input type="text" id="title-quality" name="title-quality">
-
-                <label for="title-watches">Перегляди</label>
-                <input type="text" id="title-watches" name="title-watches">
-
-                <label for="title-category">Категорія</label>
-                <input type="text" id="title-category" name="title-category">
-
-                <label for="title-movie_length">Тривалість фільму</label>
-                <input type="text" id="title-movie_length" name="title-movie_length">
-
-                <button id="add_anime">Підтвердити</button>
-            </div>
-
+            <h5 style="color: #fff;">Усі аніме:</h5>
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Назва</th>
+                    <th>Оригінальна назва</th>
+                    <th>Опис</th>
+                    <th>Назва картинки</th>
+                    <th>Категорія</th>
+                    <th>Дії</th>
+                </tr>
+                {% for title in titles %}
+                    <tr>
+                        <td>{{title.id}}</td>
+                        <td>{{title.name}}</td>
+                        <td>{{title.original_name}}</td>
+                        <td>{{title.description}}</td>
+                        <td>{{title.image_name}}</td>
+                        <td>{{title.category.name}}</td>
+                        <td>
+                            <a href="/admin-panel/delete-title/{{title.id}}">Видалити</a>
+                            <a href="/admin-panel/update-title/{{title.id}}">Змінити</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr><td colspan="7"><a href="/admin-panel/add-title">Додати аніме</a></td></tr>
+            </table>
             <div class="user col-6">
                 <h4>Додати користувача</h4>
 
