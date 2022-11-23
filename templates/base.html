@@ -23,7 +23,9 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <div class="col-lg-1"></div>
+                <div class="col-lg-1">
+                    <a href="./index"><img src="{{ url_for('static',filename = 'img/logo.png')}}" alt=""></a>
+                </div>
                 <div class="col-lg-10">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
@@ -47,6 +49,31 @@
     </header>
 
     {% block body %}{% endblock %}
+
+    <footer class="footer">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a href="./index"><img src="{{ url_for('static',filename = 'img/logo.png')}}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer__nav">
+                        <ul>
+                            <li class="active"><a href="./index">Головна</a></li>
+                            <li><a href="./categories">Категорії</a></li>
+                            <li><a href="./blog">Наш блог</a></li>
+                            <li><a href="#">Наші контакти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/js/bootstrap.min.js')}}"></script>
