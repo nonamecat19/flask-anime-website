@@ -1700,7 +1700,7 @@ ol {
 	height: 330px;
 	width: 1px;
 	background: rgba(255, 255, 255, 0.2);
-	content: "";
+	/*content: "";*/
 }
 
 .login__form h3 {

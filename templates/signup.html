@@ -22,22 +22,23 @@
     <!-- Normal Breadcrumb End -->
 
     <!-- Signup Section Begin -->
-    <section class="signup spad">
+    <section class="signup">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-3"></div>
+                <div class="col-4">
                     <div class="login__form">
                         <h3>Реєстрація</h3>
                         <form action="#">
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Електронна адреса">
+                                    <input type="text" placeholder="Нікнейм">
                                 </label>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Ваше ім'я">
+                                    <input type="text" placeholder="Логін">
                                 </label>
                                 <span class="icon_profile"></span>
                             </div>
@@ -49,20 +50,10 @@
                             </div>
                             <button type="submit" class="site-btn">Увійти зараз</button>
                         </form>
-                        <h5>Вже маєте обліковий запис? <a>Увійти</a></h5>
+                        <h5>Вже маєте обліковий запис? <a href="./login">Увійти</a></h5>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="login__social__links">
-                        <h3>Увійти з:</h3>
-                        <ul>
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Увійти з Facebook</a>
-                            </li>
-                            <li><a href="#" class="google"><i class="fa fa-google"></i> Увійти з Google</a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Увійти з Twitter</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="col-5"></div>
             </div>
         </div>
     </section>
@@ -95,16 +86,5 @@
       </footer>
       <!-- Footer Section End -->
 
-      <!-- Search model Begin -->
-      <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <label for="search-input"></label>
-                <input type="text" id="search-input" placeholder="Знайти...">
-            </form>
-        </div>
-    </div>
-    <!-- Search model end -->
 
 {% endblock %}
