@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Аніме по категоріях</title>
+{% endblock %}
+
+{% block body %}
+
+    <!-- Normal Breadcrumb Begin -->
+    <section class="normal-breadcrumb set-bg" data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2>Список всіх аніме</h2>
+                        <p>Вітаємо на Anime.org</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Normal Breadcrumb End -->
+
+<!-- Product Section Begin -->
+<section class="product-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% for section in sections %}
+                <div class="product__page__content">
+                    <div class="product__page__title">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-6">
+                                <div class="section-title">
+                                    <h4>{{ section[0].name }}</h4>
+                                </div>
+                            </div>
+<!--                            <div class="col-lg-4 col-md-4 col-sm-6">-->
+<!--                                <div class="product__page__filter">-->
+<!--                                    <p>Order by:</p>-->
+<!--                                    <select>-->
+<!--                                        <option value="">A-Z</option>-->
+<!--                                        <option value="">1-10</option>-->
+<!--                                        <option value="">10-50</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for title in section[1] %}
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{title.image_name}}">
+                                    <div class="ep">{{title.age_restriction}}+</div>
+                                </div>
+                                <div class="product__item__text">
+                                    <ul>
+                                        <li>{{title.status}}</li>
+                                        <li>{{title.type}}</li>
+                                    </ul>
+                                    <h5><a href="/anime-details/{{title.id}}">{{title.name}}</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+<!--                <div class="product__pagination">-->
+<!--                    <a href="#" class="current-page">1</a>-->
+<!--                    <a href="#">2</a>-->
+<!--                    <a href="#">3</a>-->
+<!--                    <a href="#">4</a>-->
+<!--                    <a href="#">5</a>-->
+<!--                    <a href="#"><i class="fa fa-angle-double-right"></i></a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+{% endblock %}

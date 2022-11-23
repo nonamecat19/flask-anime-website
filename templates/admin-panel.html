@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Адмін панель</title>
+{% endblock %}
+
+{% block body %}
+
+    <section class="normal-breadcrumb set-bg" data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2>Панель адміністратора</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container">
+        <div class="row" id="admin_page">
+            <div class="title col-6">
+                <h4>Додати аніме</h4>
+                <label for="title-name">Назва</label>
+                <input type="text" id="title-name" name="title-name">
+
+                <label for="title-description">Опис</label>
+                <textarea name="title-description" id="title-description" rows="2"></textarea>
+
+                <label for="title-image">Назва картинки</label>
+                <input type="text" id="title-image" name="title-image">
+
+                <label for="title-type">Тип</label>
+                <input type="text" id="title-type" name="title-type">
+
+                <label for="title-studio">Студія</label>
+                <input type="text" id="title-studio" name="title-studio">
+
+                <label for="title-date_of_creating">Дата створеня</label>
+                <input type="text" id="title-date_of_creating" name="title-date_of_creating">
+
+                <label for="title-status">Статус</label>
+                <input type="text" id="title-status" name="title-status">
+
+                <label for="title-mark">Оцінка</label>
+                <input type="text" id="title-mark" name="title-mark">
+
+                <label for="title-quality">Якість</label>
+                <input type="text" id="title-quality" name="title-quality">
+
+                <label for="title-watches">Перегляди</label>
+                <input type="text" id="title-watches" name="title-watches">
+
+                <label for="title-category">Категорія</label>
+                <input type="text" id="title-category" name="title-category">
+
+                <label for="title-movie_length">Тривалість фільму</label>
+                <input type="text" id="title-movie_length" name="title-movie_length">
+
+                <button id="add_anime">Підтвердити</button>
+            </div>
+
+            <div class="user col-6">
+                <h4>Додати користувача</h4>
+
+                <label for="user-nickname">Нікнейм</label>
+                <input type="text" id="user-nickname" name="user-nickname">
+
+                <label for="user-login">Логін</label>
+                <input type="text" id="user-login" name="user-login">
+
+                <label for="user-password">Пароль</label>
+                <input type="text" id="user-password" name="user-password">
+
+                <button id="add_user">Підтвердити</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

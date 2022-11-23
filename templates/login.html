@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Вхід</title>
+{% endblock %}
+
+{% block body %}
+
+    <!-- Normal Breadcrumb Begin -->
+    <section class="normal-breadcrumb set-bg"
+             data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2>Авторизація</h2>
+                        <p>Вітаємо на сайті Anime.org</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Normal Breadcrumb End -->
+
+    <!-- Ввійти Section Begin -->
+    <section class="login spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login__form">
+                        <h3>Ввійти</h3>
+                        <form action="#">
+                            <div class="input__item">
+                                <label>
+                                    <input type="text" placeholder="Ваша поштова адреса">
+                                </label>
+                                <span class="icon_mail"></span>
+                            </div>
+                            <div class="input__item">
+                                <label>
+                                    <input type="text" placeholder="Пароль">
+                                </label>
+                                <span class="icon_lock"></span>
+                            </div>
+                            <button type="submit" class="site-btn">Ввійти зараз</button>
+                        </form>
+                        <a href="#" class="forget_pass">Забули свій пароль?</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login__register">
+                        <h3>Не маєте акаунта?</h3>
+                        <a href="./signup" class="primary-btn">Зареєструватися зараз</a>
+                    </div>
+                </div>
+            </div>
+            <div class="login__social">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login__social__links">
+                            <span>або</span>
+                            <ul>
+                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Увійти з Facebook</a></li>
+                                <li><a href="#" class="google"><i class="fa fa-google"></i> Увійти з Google</a></li>
+                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Увійти з Twitter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Ввійти Section End -->
+
+{% endblock %}
+
