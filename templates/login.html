@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
-                        <h2>Ввійти</h2>
+                        <h2>Авторизація</h2>
                         <p>Вітаємо на сайті Anime.org</p>
                     </div>
                 </div>
@@ -29,27 +29,30 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Ввійти</h3>
-                        <form action="#">
+                        {% if message != "" %}
+                            <h5 style="color: #fff; margin: 10px 0; font-style: italic;">{{message}}</h5>
+                        {% endif %}
+                        <form method="post">
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Ваша поштова адреса">
+                                    <input type="text" name="user-login" id="user-login" placeholder="Ваш логін">
                                 </label>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Пароль">
+                                    <input type="password" name="user-password" id="user-password" placeholder="Пароль">
                                 </label>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Ввійти зараз</button>
+                            <button class="site-btn">Увійти зараз</button>
                         </form>
-                        <a href="#" class="forget_pass">Забули свій пароль?</a>
+<!--                        <a href="#" class="forget_pass">Забули свій пароль?</a>-->
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="login__register">
-                        <h3>Не маєте аккаута?</h3>
+                        <h3>Не маєте акаунта?</h3>
                         <a href="./signup" class="primary-btn">Зареєструватися зараз</a>
                     </div>
                 </div>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Додавання категорії</title>
+{% endblock %}
+
+{% block body %}
+
+    <section class="normal-breadcrumb set-bg" data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="normal__breadcrumb__text">
+                        <h2>Панель адміністратора</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container">
+        <div class="row" id="admin_page">
+            <form class="col-12" method="post">
+                <h4>Додати категорію</h4>
+                <label for="category-name">Назва</label>
+                <input type="text" id="category-name" name="category-name" required>
+
+                <div class="text-center">
+                    <button id="add_category">Підтвердити</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -7,11 +7,12 @@
 {% block body %}
 
     <!-- Hero Section Begin -->
+    <!-- Слайдер мусить мати мінімум два елемента -->
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
 
-                {# Component #}
+                {% for i in range(3) %}
                 <div class="hero__items set-bg" data-setbg="{{ url_for('static',filename = 'img/hero/hero-1.jpg') }}">
                     <div class="row">
                         <div class="col-lg-6">
@@ -24,12 +25,7 @@
                         </div>
                     </div>
                 </div>
-                {# Component #}
-
-
-                {# Без другого діва не роблять стрілки #}
-                <div class="hero__items set-bg"></div>
-
+                {% endfor %}
 
             </div>
         </div>
@@ -40,200 +36,145 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="trending__product">
+                <div class="col-lg-12">
+
+                    {% for section in sections %}
+                    <div class="product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <div class="section-title">
-                                    <h4>В тренді</h4>
+                                    <h4>{{section[0].name}}</h4>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
-                                    <a href="#" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
+                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-
-                            {# Component #}
+                            {% for title in section[1] %}
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ url_for('static',filename = 'img/trending/trend-1.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{title.image_name}}">
+                                        <div class="ep">{{title.age_restriction}}+</div>
+                                        <div class="comment"><i class="fa fa-star"></i>{{title.star_count}}</div>
                                     </div>
                                     <div class="product__item__text">
                                         <ul>
-                                            <li>Бойовик</li>
-                                            <li>Фільм</li>
+                                            <li>{{title.status}}</li>
+                                            <li>{{title.type}}</li>
                                         </ul>
-                                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                        <h5><a href="/anime-details/{{title.id}}">{{title.name}}</a></h5>
                                     </div>
                                 </div>
                             </div>
-                            {# Component #}
-
+                            {% endfor %}
                         </div>
                     </div>
-                    <div class="popular__product">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <div class="section-title">
-                                    <h4>Популярні зараз</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <div class="btn__all">
-                                    <a href="#" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+                    {% endfor %}
 
-                            {# Component #}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ url_for('static',filename = 'img/popular/popular-1.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Бойовик</li>
-                                            <li>Фільм</li>
-                                        </ul>
-                                        <h5><a href="#">Sen to Chihiro no Kamikakushi</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            {# Component #}
+<!--                    <div class="trending__product">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
+<!--                                <div class="section-title">-->
+<!--                                    <h4>В тренді</h4>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
+<!--                                <div class="btn__all">-->
+<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            {% for trend in trends %}-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{trend.image_name}}">-->
+<!--                                        <div class="ep">{{trend.age_restriction}}+</div>-->
+<!--                                        <div class="comment"><i class="fa fa-star"></i>{{trend.star_count}}</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>{{trend.status}}</li>-->
+<!--                                            <li>{{trend.type}}</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="/anime-details/{{trend.id}}">{{trend.name}}</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            {% endfor %}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="popular__product">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
+<!--                                <div class="section-title">-->
+<!--                                    <h4>Популярні зараз</h4>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
+<!--                                <div class="btn__all">-->
+<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+
+<!--                            {% for popular in populars %}-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{popular.image_name}}">-->
+<!--                                        <div class="ep">{{popular.age_restriction}}+</div>-->
+<!--                                        <div class="comment"><i class="fa fa-star"></i>{{popular.star_count}}</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>{{popular.status}}</li>-->
+<!--                                            <li>{{popular.type}}</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="/anime-details/{{popular.id}}">{{popular.name}}</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            {% endfor %}-->
 
 
-                        </div>
-                    </div>
-                    <div class="recent__product">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <div class="section-title">
-                                    <h4>Новинки</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <div class="btn__all">
-                                    <a href="#" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="recent__product">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
+<!--                                <div class="section-title">-->
+<!--                                    <h4>Новинки</h4>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
+<!--                                <div class="btn__all">-->
+<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
 
-                            {# Component #}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                         data-setbg="{{ url_for('static',filename = 'img/recent/recent-1.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Бойовик</li>
-                                            <li>Фільм</li>
-                                        </ul>
-                                        <h5><a href="#">Great Teacher Onizuka</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            {# Component #}
-
-                        </div>
-                    </div>
-                    <div class="live__product">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <div class="section-title">
-                                    <h4>Кіноадаптація</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <div class="btn__all">
-                                    <a href="#" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            {# Component #}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                         data-setbg="{{ url_for('static',filename = 'img/live/live-1.jpg') }}">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Бойовик</li>
-                                            <li>Фільм</li>
-                                        </ul>
-                                        <h5><a href="#">Shouwa Genroku Rakugo Shinjuu</a></h5>
-                                    </div>
-                                </div>
-                            </div>
-                            {# Component #}
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
-                        <div class="product__sidebar__view">
-                            <div class="section-title">
-                                <h5>Найбільше переглядів</h5>
-                            </div>
-                            <ul class="filter__controls">
-                                <li class="active" data-filter="*">День</li>
-                                <li data-filter=".week">Тиждень</li>
-                                <li data-filter=".month">Місяць</li>
-                                <li data-filter=".years">Рік</li>
-                            </ul>
-                            <div class="filter__gallery">
-
-                                {# Component #}
-                                <div class="product__sidebar__view__item set-bg mix day years"
-                                     data-setbg="{{ url_for('static',filename = 'img/sidebar/tv-1.jpg') }}">
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                                </div>
-                                {# Component #}
-
-                            </div>
-                        </div>
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>Додати коментар</h5>
-                            </div>
-
-                            {# Component #}
-                            <div class="product__sidebar__comment__item">
-                                <div class="product__sidebar__comment__item__pic">
-                                    <img src="{{ url_for('static',filename = 'img/sidebar/comment-1.jpg') }}" alt="">
-                                </div>
-                                <div class="product__sidebar__comment__item__text">
-                                    <ul>
-                                        <li>Бойовик</li>
-                                        <li>Фільм</li>
-                                    </ul>
-                                    <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                                    <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                </div>
-                            </div>
-                            {# Component #}
+<!--                           {% for new in news %}-->
+<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                                <div class="product__item">-->
+<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{new.image_name}}">-->
+<!--                                        <div class="ep">{{new.age_restriction}}+</div>-->
+<!--                                        <div class="comment"><i class="fa fa-star"></i>{{new.star_count}}</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="product__item__text">-->
+<!--                                        <ul>-->
+<!--                                            <li>{{new.status}}</li>-->
+<!--                                            <li>{{new.type}}</li>-->
+<!--                                        </ul>-->
+<!--                                        <h5><a href="/anime-details/{{new.id}}">{{new.name}}</a></h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            {% endfor %}-->
 
                         </div>
                     </div>
@@ -242,5 +183,7 @@
         </div>
     </section>
     <!-- Product Section End -->
+
+
 
 {% endblock %}

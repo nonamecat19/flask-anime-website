@@ -2313,6 +2313,8 @@ ol {
 #admin_page label{
 	color: white;
 	width: 40%;
+	text-align: right;
+	padding-right: 20px;
 }
 
 #admin_page{
@@ -2322,12 +2324,12 @@ ol {
 	flex-wrap: wrap;
 }
 
-#admin_page input{
-	width: 50%;
+#admin_page input, select{
+	width: 30%;
 }
 
 #admin_page textarea{
-	width: 50%;
+	width: 30%;
 	resize: none;
 	margin-bottom: -10px;
 }
@@ -2341,4 +2343,17 @@ ol {
 	color: white;
 	margin-bottom: 10px;
 	text-align: center;
+}
+
+#admin_page .nice-select{
+    float: none;
+    width: calc(30% - 14px);
+    margin: 7px;
+    self-align: right;
+    height: 30px;
+    line-height: 30px;
+}
+
+#admin_page button{
+    self-align: center;
 }
