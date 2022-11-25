@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 db = SQLAlchemy(app)
 
-# <-- database #
+
 class Category(db.Model):
     __tablename__ = "category"
 
@@ -15,6 +15,7 @@ class Category(db.Model):
 
     def __repr__(self):
         return f'<Category {self.name}>'
+
 
 class Title(db.Model):
     __tablename__ = "title"
@@ -39,6 +40,7 @@ class Title(db.Model):
     def __repr__(self):
         return f'<Title {self.name}>'
 
+
 class User(db.Model):
     __tablename__ = "user"
 
@@ -50,6 +52,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.nickname}>'
 
+
 class SelectedTitle(db.Model):
     __tablename__ = "selectedTitle"
 
@@ -59,15 +62,14 @@ class SelectedTitle(db.Model):
     title_id = db.Column(db.Integer, db.ForeignKey('title.id'))
     title = db.relationship("Title", backref=db.backref("title", uselist=False))
     status = db.Column(db.String(200), nullable=False)
-# --> #
 
-# <-- links #
+
 @app.route('/')
 def index():
     sections = []
     categories = Category.query.all()
     for i in range(3):
-        sections.append([categories[i], Title.query.filter_by(category_id=i+1).all()[:3]])
+        sections.append([categories[i], Title.query.filter_by(category_id=i + 1).all()[:3]])
     return render_template('index.html', sections=sections)
 
 
@@ -94,6 +96,7 @@ def categories():
             sections.append([category, titles])
     return render_template('categories.html', sections=sections)
 
+
 @app.route('/contacts')
 def blog():
     return render_template('blog-details.html')
@@ -108,7 +111,7 @@ def login():
             return redirect("/admin-panel")
         for user in users:
             if user.login == request.form['user-login'] and user.password == request.form['user-password']:
-                return redirect("/profile/"+str(user.id))
+                return redirect("/profile/" + str(user.id))
         message = "Неправильно введений логін чи пароль"
     return render_template('login.html', message=message)
 
@@ -117,11 +120,11 @@ def login():
 def signup():
     if request.method == "POST":
         new_user = User(login=request.form['user-login'], nickname=request.form['user-nickname'],
-                          password=request.form['user-password'])
+                        password=request.form['user-password'])
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect("/profile/"+str(new_user.id))
+            return redirect("/profile/" + str(new_user.id))
         except Exception as e:
             return str(e)
     return render_template('signup.html')
@@ -145,6 +148,7 @@ def admin_panel():
 
     return render_template('admin-panel.html', titles=titles, categories=categories, activities=activities, users=users)
 
+
 @app.route('/admin-panel/add-title', methods=["POST", "GET"])
 def title_adding():
     categories = Category.query.all()
@@ -152,7 +156,8 @@ def title_adding():
         new_title = Title(name=request.form['title-name'], original_name=request.form['title-original_name'],
                           description=request.form['title-description'], image_name=request.form['title-image_name'],
                           type=request.form['title-type'], studio=request.form['title-studio'],
-                          category_id=request.form.get('title-category'), age_restriction=request.form['title-age_restriction'],
+                          category_id=request.form.get('title-category'),
+                          age_restriction=request.form['title-age_restriction'],
                           movie_length=request.form['title-movie_length'], star_count=request.form['title-star_count'],
                           genres=request.form['title-genres'], status=request.form['title-status'])
         try:
@@ -163,6 +168,7 @@ def title_adding():
             return str(e)
     return render_template('add-title.html', categories=categories)
 
+
 @app.route('/admin-panel/delete-title/<int:id>')
 def title_deleting(id):
     title = Title.query.get_or_404(id)
@@ -171,7 +177,8 @@ def title_deleting(id):
         db.session.commit()
         return redirect("/admin-panel")
     except Exception as ex:
-        return str(e)
+        return str(ex)
+
 
 @app.route('/admin-panel/update-title/<int:id>', methods=["POST", "GET"])
 def title_updating(id):
@@ -196,6 +203,8 @@ def title_updating(id):
         except Exception as ex:
             return str(ex)
     return render_template('update-title.html', categories=categories, title=title)
+
+
 @app.route('/admin-panel/add-category', methods=["POST", "GET"])
 def category_adding():
     if request.method == "POST":
@@ -208,6 +217,7 @@ def category_adding():
             return str(e)
     return render_template('add-category.html')
 
+
 @app.route('/admin-panel/delete-category/<int:id>')
 def category_deleting(id):
     category = Category.query.get_or_404(id)
@@ -216,7 +226,8 @@ def category_deleting(id):
         db.session.commit()
         return redirect("/admin-panel")
     except Exception as ex:
-        return str(e)
+        return str(ex)
+
 
 @app.route('/admin-panel/update-category/<int:id>', methods=["POST", "GET"])
 def category_updating(id):
@@ -230,10 +241,12 @@ def category_updating(id):
             return str(ex)
     return render_template('update-category.html', category=category)
 
+
 @app.route('/profile/<int:id>')
 def profile(id):
     user = User.query.get_or_404(id)
     return render_template('profile.html', user=user)
+
 
 @app.route('/profile/delete/<int:id>')
 def profile_deleting(id):
@@ -244,7 +257,7 @@ def profile_deleting(id):
         return redirect('/')
     except Exception as ex:
         return str(ex)
-# --> #
+
 
 if __name__ == '__main__':
     app.run(debug=True)
