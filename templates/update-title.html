@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Додавання тайтлу</title>
+    <title>Зміна тайтлу</title>
 {% endblock %}
 
 {% block body %}
@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row" id="admin_page">
             <form class="col-12" method="post">
-                <h4>Додати аніме</h4>
+                <h4>Змінити аніме</h4>
                 <label for="title-name">Назва</label>
                 <input type="text" id="title-name" name="title-name" value="{{title.name}}" required>
 

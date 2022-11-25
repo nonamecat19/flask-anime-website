@@ -75,7 +75,6 @@ def index():
 def anime_details(id):
     title = Title.query.get_or_404(id)
     trends = Title.query.filter_by(category_id=3).all()
-    # лайки б треба змінити
     likes = SelectedTitle.query.filter_by(title_id=id).all()
     count = 0
     for like in likes:
@@ -100,20 +99,51 @@ def blog():
     return render_template('blog-details.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=["POST", "GET"])
 def login():
-    return render_template('login.html')
+    message = ""
+    if request.method == "POST":
+        users = User.query.all()
+        if users[0].login == request.form['user-login'] and users[0].password == request.form['user-password']:
+            return redirect("/admin-panel")
+        for user in users:
+            if user.login == request.form['user-login'] and user.password == request.form['user-password']:
+                return redirect("/profile/"+str(user.id))
+        message = "Неправильно введений логін чи пароль"
+    return render_template('login.html', message=message)
 
 
-@app.route('/signup')
+@app.route('/signup', methods=["POST", "GET"])
 def signup():
+    if request.method == "POST":
+        new_user = User(login=request.form['user-login'], nickname=request.form['user-nickname'],
+                          password=request.form['user-password'])
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect("/profile/"+str(new_user.id))
+        except Exception as e:
+            return str(e)
     return render_template('signup.html')
 
 
 @app.route('/admin-panel')
 def admin_panel():
     titles = Title.query.all()
-    return render_template('admin-panel.html', titles=titles)
+    users = User.query.all()
+    categories = Category.query.all()
+    activities = {}
+
+    def getCategoryActivity(category_id):
+        for title in titles:
+            if title.category_id == category_id:
+                return True
+        return False
+
+    for category in categories:
+        activities[category.id] = getCategoryActivity(category.id)
+
+    return render_template('admin-panel.html', titles=titles, categories=categories, activities=activities, users=users)
 
 @app.route('/admin-panel/add-title', methods=["POST", "GET"])
 def title_adding():
@@ -166,6 +196,54 @@ def title_updating(id):
         except Exception as ex:
             return str(ex)
     return render_template('update-title.html', categories=categories, title=title)
+@app.route('/admin-panel/add-category', methods=["POST", "GET"])
+def category_adding():
+    if request.method == "POST":
+        new_category = Category(name=request.form['category-name'])
+        try:
+            db.session.add(new_category)
+            db.session.commit()
+            return redirect("/admin-panel")
+        except Exception as e:
+            return str(e)
+    return render_template('add-category.html')
+
+@app.route('/admin-panel/delete-category/<int:id>')
+def category_deleting(id):
+    category = Category.query.get_or_404(id)
+    try:
+        db.session.delete(category)
+        db.session.commit()
+        return redirect("/admin-panel")
+    except Exception as ex:
+        return str(e)
+
+@app.route('/admin-panel/update-category/<int:id>', methods=["POST", "GET"])
+def category_updating(id):
+    category = Category.query.get_or_404(id)
+    if request.method == "POST":
+        category.name = request.form['category-name']
+        try:
+            db.session.commit()
+            return redirect("/admin-panel")
+        except Exception as ex:
+            return str(ex)
+    return render_template('update-category.html', category=category)
+
+@app.route('/profile/<int:id>')
+def profile(id):
+    user = User.query.get_or_404(id)
+    return render_template('profile.html', user=user)
+
+@app.route('/profile/delete/<int:id>')
+def profile_deleting(id):
+    user = User.query.get_or_404(id)
+    try:
+        db.session.delete(user)
+        db.session.commit()
+        return redirect('/')
+    except Exception as ex:
+        return str(ex)
 # --> #
 
 if __name__ == '__main__':

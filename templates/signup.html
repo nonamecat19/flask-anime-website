@@ -29,26 +29,26 @@
                 <div class="col-4">
                     <div class="login__form">
                         <h3>Створити акаунт</h3>
-                        <form action="#">
+                        <form method="post">
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Нікнейм">
+                                    <input type="text" name="user-nickname" id="user-nickname" placeholder="Нікнейм">
                                 </label>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Логін">
+                                    <input type="text" name="user-login" id="user-login" placeholder="Логін">
                                 </label>
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
                                 <label>
-                                    <input type="text" placeholder="Пароль">
+                                    <input type="password" name="user-password" id="user-password" placeholder="Пароль">
                                 </label>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Увійти зараз</button>
+                            <button type="submit" class="site-btn">Зареєструватися й увійти</button>
                         </form>
                         <h5>Вже маєте обліковий запис? <a href="./login">Увійти</a></h5>
                     </div>

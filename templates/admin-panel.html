@@ -22,6 +22,31 @@
     <div class="container">
         <div class="row" id="admin_page">
 
+            <h5 style="color: #fff;">Усі категорії:</h5>
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Назва</th>
+                    <th>Дії</th>
+                </tr>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{category.id}}</td>
+                        <td>{{category.name}}</td>
+                        <td>
+<!--                            Це для того, щоб не можна було видалити важливу категорію-->
+                            {% if activities[category.id] == False %}
+                            <a href="/admin-panel/delete-category/{{category.id}}">Видалити</a>
+                            {% else %}
+                            <a href="/admin-panel">Використовується</a>
+                            {% endif %}
+                            <a href="/admin-panel/update-category/{{category.id}}">Змінити</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr><td colspan="7"><a href="/admin-panel/add-category">Додати категорію</a></td></tr>
+            </table>
+
             <h5 style="color: #fff;">Усі аніме:</h5>
             <table class="table">
                 <tr>
@@ -49,21 +74,38 @@
                 {% endfor %}
                 <tr><td colspan="7"><a href="/admin-panel/add-title">Додати аніме</a></td></tr>
             </table>
-            <div class="user col-6">
-                <h4>Додати користувача</h4>
 
-                <label for="user-nickname">Нікнейм</label>
-                <input type="text" id="user-nickname" name="user-nickname">
+            <h5 style="color: #fff;">Усі користувачі:</h5>
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Нік</th>
+                    <th>Логін</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.nickname}}</td>
+                        <td>{{user.login}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
 
-                <label for="user-login">Логін</label>
-                <input type="text" id="user-login" name="user-login">
+<!--            -->
+<!--            <div class="user col-6">-->
+<!--                <h4>Додати користувача</h4>-->
 
-                <label for="user-password">Пароль</label>
-                <input type="text" id="user-password" name="user-password">
+<!--                <label for="user-nickname">Нікнейм</label>-->
+<!--                <input type="text" id="user-nickname" name="user-nickname">-->
 
-                <button id="add_user">Підтвердити</button>
-            </div>
+<!--                <label for="user-login">Логін</label>-->
+<!--                <input type="text" id="user-login" name="user-login">-->
 
+<!--                <label for="user-password">Пароль</label>-->
+<!--                <input type="text" id="user-password" name="user-password">-->
+
+<!--                <button id="add_user">Підтвердити</button>-->
+<!--            </div>-->
         </div>
     </div>
 
