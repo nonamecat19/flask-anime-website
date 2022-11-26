@@ -6,184 +6,80 @@
 
 {% block body %}
 
-    <!-- Hero Section Begin -->
-    <!-- Слайдер мусить мати мінімум два елемента -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero__slider owl-carousel">
+<!-- Hero Section Begin -->
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider owl-carousel">
 
-                {% for i in range(3) %}
-                <div class="hero__items set-bg" data-setbg="{{ url_for('static',filename = 'img/hero/hero-1.jpg') }}">
+            {% for item in carousel_items %}
+                <div class="hero__items set-bg"
+                     data-setbg="static/img/carousel/{{ item['image'] }}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
                                 <div class="label">Пригоди</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <h2>{{ item.title }}</h2>
+                                <p>{{ item.desc }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
 
-            </div>
         </div>
-    </section>
-    <!-- Hero Section End -->
+    </div>
+</section>
+<!-- Hero Section End -->
 
-    <!-- Product Section Begin -->
-    <section class="product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-                    {% for section in sections %}
+                {% for section in sections %}
                     <div class="product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <div class="section-title">
-                                    <h4>{{section[0].name}}</h4>
+                                    <h4>{{ section[0].name }}</h4>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="btn__all">
-                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>
+                                    <a href="/categories" class="primary-btn">Переглянути всі <span
+                                            class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             {% for title in section[1] %}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{title.image_name}}">
-                                        <div class="ep">{{title.age_restriction}}+</div>
-                                        <div class="comment"><i class="fa fa-star"></i>{{title.star_count}}</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>{{title.status}}</li>
-                                            <li>{{title.type}}</li>
-                                        </ul>
-                                        <h5><a href="/anime-details/{{title.id}}">{{title.name}}</a></h5>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg"
+                                             data-setbg="static/img/anime-posters/{{ title.image_name }}">
+                                            <div class="ep">{{ title.age_restriction }}+</div>
+                                            <div class="comment"><i class="fa fa-star"></i>{{ title.star_count }}
+                                            </div>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <ul>
+                                                <li>{{ title.status }}</li>
+                                                <li>{{ title.type }}</li>
+                                            </ul>
+                                            <h5><a href="/anime-details/{{ title.id }}">{{ title.name }}</a></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         </div>
                     </div>
-                    {% endfor %}
+                {% endfor %}
 
-<!--                    <div class="trending__product">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
-<!--                                <div class="section-title">-->
-<!--                                    <h4>В тренді</h4>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
-<!--                                <div class="btn__all">-->
-<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            {% for trend in trends %}-->
-<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                                <div class="product__item">-->
-<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{trend.image_name}}">-->
-<!--                                        <div class="ep">{{trend.age_restriction}}+</div>-->
-<!--                                        <div class="comment"><i class="fa fa-star"></i>{{trend.star_count}}</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product__item__text">-->
-<!--                                        <ul>-->
-<!--                                            <li>{{trend.status}}</li>-->
-<!--                                            <li>{{trend.type}}</li>-->
-<!--                                        </ul>-->
-<!--                                        <h5><a href="/anime-details/{{trend.id}}">{{trend.name}}</a></h5>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            {% endfor %}-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="popular__product">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
-<!--                                <div class="section-title">-->
-<!--                                    <h4>Популярні зараз</h4>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
-<!--                                <div class="btn__all">-->
-<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-
-<!--                            {% for popular in populars %}-->
-<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                                <div class="product__item">-->
-<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{popular.image_name}}">-->
-<!--                                        <div class="ep">{{popular.age_restriction}}+</div>-->
-<!--                                        <div class="comment"><i class="fa fa-star"></i>{{popular.star_count}}</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product__item__text">-->
-<!--                                        <ul>-->
-<!--                                            <li>{{popular.status}}</li>-->
-<!--                                            <li>{{popular.type}}</li>-->
-<!--                                        </ul>-->
-<!--                                        <h5><a href="/anime-details/{{popular.id}}">{{popular.name}}</a></h5>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            {% endfor %}-->
-
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="recent__product">-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-lg-8 col-md-8 col-sm-8">-->
-<!--                                <div class="section-title">-->
-<!--                                    <h4>Новинки</h4>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 col-sm-4">-->
-<!--                                <div class="btn__all">-->
-<!--                                    <a href="/categories" class="primary-btn">Переглянути всі <span class="arrow_right"></span></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-
-<!--                           {% for new in news %}-->
-<!--                            <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                                <div class="product__item">-->
-<!--                                    <div class="product__item__pic set-bg" data-setbg="static/img/anime-posters/{{new.image_name}}">-->
-<!--                                        <div class="ep">{{new.age_restriction}}+</div>-->
-<!--                                        <div class="comment"><i class="fa fa-star"></i>{{new.star_count}}</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="product__item__text">-->
-<!--                                        <ul>-->
-<!--                                            <li>{{new.status}}</li>-->
-<!--                                            <li>{{new.type}}</li>-->
-<!--                                        </ul>-->
-<!--                                        <h5><a href="/anime-details/{{new.id}}">{{new.name}}</a></h5>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            {% endfor %}-->
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
-    <!-- Product Section End -->
-
-
+    </div>
+</section>
+<!-- Product Section End -->
 
 {% endblock %}

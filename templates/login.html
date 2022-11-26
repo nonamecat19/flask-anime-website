@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block body %}
-
-    <!-- Normal Breadcrumb Begin -->
     <section class="normal-breadcrumb set-bg"
              data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
         <div class="container">
@@ -20,16 +18,14 @@
             </div>
         </div>
     </section>
-    <!-- Normal Breadcrumb End -->
 
-    <!-- Ввійти Section Begin -->
     <section class="login spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Ввійти</h3>
-                        {% if message != "" %}
+                        {% if message %}
                             <h5 style="color: #fff; margin: 10px 0; font-style: italic;">{{message}}</h5>
                         {% endif %}
                         <form method="post">
@@ -47,7 +43,6 @@
                             </div>
                             <button class="site-btn">Увійти зараз</button>
                         </form>
-<!--                        <a href="#" class="forget_pass">Забули свій пароль?</a>-->
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -57,23 +52,8 @@
                     </div>
                 </div>
             </div>
-            <div class="login__social">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="login__social__links">
-                            <span>або</span>
-                            <ul>
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i> Увійти з Facebook</a></li>
-                                <li><a href="#" class="google"><i class="fa fa-google"></i> Увійти з Google</a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Увійти з Twitter</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-    <!-- Ввійти Section End -->
 
 {% endblock %}
 

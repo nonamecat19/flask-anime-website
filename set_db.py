@@ -1,4 +1,4 @@
-from app import db, Title
+from app import db, Title, Category, User, Comment
 
 db.session.add(Category(name="Новинки"))
 db.session.add(Category(name="Популярні"))
@@ -18,5 +18,7 @@ db.session.add(Title(name="Сао", original_name="sword art online", descriptio
 db.session.add(Title(name="Обіцяний Неверленд", original_name="the promised neverlend", description="Ipsum",
                      image_name="popular-3.jpg", type="серіал", studio="Lis", category_id=3, age_restriction=16,
                      movie_length="20хв/серія", star_count=4, genres="пригоди", status="онгоїнг"))
+
+db.session.add(Comment(user_id=1, title_id=1, comment="Шось дуже круте"))
 
 db.session.commit()

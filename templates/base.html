@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/elegant-icons.css') }}" type="text/css">
@@ -16,78 +17,97 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index">
-                            <img alt="" src="{{ url_for('static',filename = 'img/logo.jpg') }}">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li><a href="/">Головна</a></li>
-                                <li><a href="/categories">Аніме по категоріях</a></li>
-                                <li><a href="/login">Увійти</a></li>
-                                <li><a href="/admin-panel">Панель адміністратора</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="/profile"><span class="icon_profile"></span></a>
-                    </div>
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a href="./index">
+                        <img alt="" src="{{ url_for('static', filename = 'img/logo.png') }}">
+                    </a>
                 </div>
             </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-
-    {% block body %}{% endblock %}
-
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="page-up">
-            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer__logo">
-                        <a href="./index"><img src="{{ url_for('static',filename = 'img/logo.png')}}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer__nav">
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="/">Головна</a></li>
-                            <li><a href="/categories">Категорії</a></li>
-                            <li><a href="/login">Кабінет</a></li>
+                            <li><a href="/categories">Аніме по категоріях</a></li>
+                            {% if not session.auth %}
+                                <li><a href="/login">Увійти</a></li>
+                            {% endif %}
+                            {% if session.user %}
+                                <li><a href="/profile/{{ session.auth_id }}">Профіль</a></li>
+                            {% endif %}
+                            {% if session.admin %}
+                                <li><a href="/admin-panel">Панель адміністратора</a></li>
+                            {% endif %}
                         </ul>
-                    </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="header__right">
+                    {% if session.auth %}
+                        <a href="/profile/{{ session.auth_id }}"><span class="icon_profile"></span></a>
+                    {% else %}
+                        <a href="/login"><span class="icon_profile"></span></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- Footer Section End -->
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
 
-    <script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/player.js')}}"></script>
-    <script src="{{url_for('static', filename='js/jquery.nice-select.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/mixitup.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/jquery.slicknav.js')}}"></script>
-    <script src="{{url_for('static', filename='js/owl.carousel.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+{% block body %}{% endblock %}
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="page-up">
+        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer__logo">
+                    <a href="./index"><img src="{{ url_for('static',filename = 'img/logo.png') }}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer__nav">
+                    <ul>
+                        <li><a href="/">Головна</a></li>
+                        {% if session.user %}
+                            <li><a href="/profile/{{ session.auth_id }}">Профіль</a></li>
+                        {% endif %}
+                        <li><a href="/categories">Аніме по категоріях</a></li>
+                        {% if not session.auth %}
+                            <li><a href="/login">Увійти</a></li>
+                        {% endif %}
+                        {% if session.admin %}
+                            <li><a href="/admin-panel">Панель адміністратора</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/player.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mixitup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.slicknav.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
