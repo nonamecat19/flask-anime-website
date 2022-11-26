@@ -118,7 +118,6 @@ def login():
 
         users = User.query.all()
         if users[0].login == request.form['user-login'] and users[0].password == request.form['user-password']:
-            # дані передаються в сесію
             session['admin'] = True
             session['user'] = False
             session['auth'] = True
@@ -126,7 +125,6 @@ def login():
             return redirect("/admin-panel")
         for user in users:
             if user.login == request.form['user-login'] and user.password == request.form['user-password']:
-                # дані передаються в сесію
                 session['user'] = True
                 session['admin'] = False
                 session['auth'] = True
@@ -165,7 +163,6 @@ def signup():
 @app.route('/admin-panel')
 def admin_panel():
     if 'admin' not in session or not session['admin']:
-        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
         return redirect('/')
 
     titles = Title.query.all()
@@ -190,7 +187,6 @@ def admin_panel():
 @app.route('/admin-panel/add-title', methods=["POST", "GET"])
 def title_adding():
     if 'admin' not in session or not session['admin']:
-        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
         return redirect('/')
 
     categories = Category.query.all()
@@ -214,7 +210,6 @@ def title_adding():
 @app.route('/admin-panel/delete-title/<int:id>')
 def title_deleting(id):
     if 'admin' not in session or not session['admin']:
-        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
         return redirect('/')
 
     title = Title.query.get_or_404(id)
@@ -232,7 +227,6 @@ def title_deleting(id):
 @app.route('/admin-panel/update-title/<int:id>', methods=["POST", "GET"])
 def title_updating(id):
     if 'admin' not in session or not session['admin']:
-        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
         return redirect('/')
 
     categories = Category.query.all()
