@@ -2359,8 +2359,20 @@ ol {
 }
 
 
-.logout{
-	padding: 0;
-	margin: 0;
-	display: inline;
+
+.page_not_found{
+	min-height: 80vh;
+	height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.page_not_found h1{
+	color: white;
+}
+
+.page_not_found h3{
+	color: white;
 }
