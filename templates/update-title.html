@@ -6,7 +6,8 @@
 
 {% block body %}
 
-    <section class="normal-breadcrumb set-bg" data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
+    <section class="normal-breadcrumb set-bg"
+             data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -24,49 +25,56 @@
             <form class="col-12" method="post">
                 <h4>Змінити аніме</h4>
                 <label for="title-name">Назва</label>
-                <input type="text" id="title-name" name="title-name" value="{{title.name}}" required>
+                <input type="text" id="title-name" name="title-name" value="{{ title.name }}" required>
 
                 <label for="title-original_name">Оригінальна назва</label>
-                <input type="text" id="title-original_name" name="title-original_name" value="{{title.original_name}}" required>
+                <input type="text" id="title-original_name" name="title-original_name" value="{{ title.original_name }}"
+                       required>
 
                 <label for="title-description">Опис</label>
-                <textarea name="title-description" id="title-description" rows="2" required>{{title.description}}</textarea>
+                <textarea name="title-description" id="title-description" rows="2"
+                          required>{{ title.description }}</textarea>
 
                 <label for="title-image_name">Назва картинки</label>
-                <input type="text" id="title-image_name" name="title-image_name" value="{{title.image_name}}" required>
+                <input type="text" id="title-image_name" name="title-image_name" value="{{ title.image_name }}"
+                       required>
 
                 <label for="title-type">Тип</label>
-                <input type="text" id="title-type" name="title-type" value="{{title.type}}" required>
+                <input type="text" id="title-type" name="title-type" value="{{ title.type }}" required>
 
                 <label for="title-genres">Жанри</label>
-                <textarea name="title-genres" id="title-genres" rows="2" required>{{title.genres}}</textarea>
+                <textarea name="title-genres" id="title-genres" rows="2" required>{{ title.genres }}</textarea>
 
                 <label for="title-status">Статус виходу</label>
-                <input type="text" id="title-status" name="title-status" value="{{title.status}}" required>
+                <input type="text" id="title-status" name="title-status" value="{{ title.status }}" required>
 
                 <label for="title-studio">Студія</label>
-                <input type="text" id="title-studio" name="title-studio" value="{{title.studio}}" required>
+                <input type="text" id="title-studio" name="title-studio" value="{{ title.studio }}" required>
 
                 <label for="title-date_of_creating">Дата створеня</label>
-                <input type="date" id="title-date_of_creating" name="title-date_of_creating" value="{{title.date_of_creating.date()}}" required>
+                <input type="date" id="title-date_of_creating" name="title-date_of_creating"
+                       value="{{ title.date_of_creating.date() }}" required>
 
                 <label for="title-age_restriction">Вікове обмеження</label>
-                <input type="number" id="title-age_restriction" name="title-age_restriction" value="{{title.age_restriction}}" required>
+                <input type="number" id="title-age_restriction" name="title-age_restriction"
+                       value="{{ title.age_restriction }}" required>
 
                 <label for="title-movie_length">Тривалість фільму/серії</label>
-                <input type="text" id="title-movie_length" name="title-movie_length" value="{{title.movie_length}}" required>
+                <input type="text" id="title-movie_length" name="title-movie_length" value="{{ title.movie_length }}"
+                       required>
 
                 <label for="title-star_count">Оцінка(к-сть зірок)</label>
-                <input type="number" id="title-star_count" name="title-star_count" value="{{title.star_count}}" required>
+                <input type="number" id="title-star_count" name="title-star_count" value="{{ title.star_count }}"
+                       required>
 
                 <div class="row">
                     <label for="title-category">Категорія</label>
                     <select name="title-category" id="title-category">
                         {% for category in categories %}
                             {% if category.id == title.category_id %}
-                            <option value="{{category.id}}" selected>{{category.name}}</option>
+                                <option value="{{ category.id }}" selected>{{ category.name }}</option>
                             {% else %}
-                            <option value="{{category.id}}">{{category.name}}</option>
+                                <option value="{{ category.id }}">{{ category.name }}</option>
                             {% endif %}
                         {% endfor %}
                     </select>
