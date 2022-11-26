@@ -8,6 +8,7 @@ app.config['SECRET_KEY'] = '1111'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 db = SQLAlchemy(app)
 
+
 class Category(db.Model):
     __tablename__ = "category"
 
@@ -144,6 +145,10 @@ def signup():
 
 @app.route('/admin-panel')
 def admin_panel():
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     titles = Title.query.all()
     users = User.query.all()
     categories = Category.query.all()
@@ -163,6 +168,10 @@ def admin_panel():
 
 @app.route('/admin-panel/add-title', methods=["POST", "GET"])
 def title_adding():
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     categories = Category.query.all()
     if request.method == "POST":
         new_title = Title(name=request.form['title-name'], original_name=request.form['title-original_name'],
@@ -183,6 +192,10 @@ def title_adding():
 
 @app.route('/admin-panel/delete-title/<int:id>')
 def title_deleting(id):
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     title = Title.query.get_or_404(id)
     try:
         db.session.delete(title)
@@ -194,6 +207,10 @@ def title_deleting(id):
 
 @app.route('/admin-panel/update-title/<int:id>', methods=["POST", "GET"])
 def title_updating(id):
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     categories = Category.query.all()
     title = Title.query.get_or_404(id)
     if request.method == "POST":
@@ -219,6 +236,10 @@ def title_updating(id):
 
 @app.route('/admin-panel/add-category', methods=["POST", "GET"])
 def category_adding():
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     if request.method == "POST":
         new_category = Category(name=request.form['category-name'])
         try:
@@ -232,6 +253,10 @@ def category_adding():
 
 @app.route('/admin-panel/delete-category/<int:id>')
 def category_deleting(id):
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     category = Category.query.get_or_404(id)
     try:
         db.session.delete(category)
@@ -243,6 +268,10 @@ def category_deleting(id):
 
 @app.route('/admin-panel/update-category/<int:id>', methods=["POST", "GET"])
 def category_updating(id):
+    if 'admin' not in session or not session['admin']:
+        # редірект на іншу сторінку якщо хоче зайти в адмінку не адмін
+        return redirect('/')
+
     category = Category.query.get_or_404(id)
     if request.method == "POST":
         category.name = request.form['category-name']
@@ -268,7 +297,7 @@ def profile(id):
         session.clear()
         # редірект на головну
         return redirect('/')
-        
+
     user = User.query.get_or_404(id)
     return render_template('profile.html', user=user)
 
@@ -279,7 +308,7 @@ def profile_deleting(id):
     try:
         db.session.delete(user)
         db.session.commit()
-        return redirect()
+        return redirect('/')
     except Exception as ex:
         return str(ex)
 
