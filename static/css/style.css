@@ -589,8 +589,8 @@ ol {
 -----------------------*/
 
 .product {
-	padding-bottom: 60px;
-	padding-top: 80px;
+	padding-bottom: 20px;
+	padding-top: 30px;
 }
 
 .product-page {
@@ -1123,7 +1123,7 @@ ol {
 .anime__details__form form textarea {
 	width: 100%;
 	font-size: 15px;
-	color: #b7b7b7;
+	color: #4c4c4c;
 	padding-left: 20px;
 	padding-top: 12px;
 	height: 110px;

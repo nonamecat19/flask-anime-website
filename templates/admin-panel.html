@@ -35,7 +35,6 @@
                         <td>{{ category.id }}</td>
                         <td>{{ category.name }}</td>
                         <td>
-                            <!-- Це для того, щоб не можна було видалити важливу категорію-->
                             {% if activities[category.id] == False %}
                                 <a href="/admin-panel/delete-category/{{ category.id }}">Видалити</a>
                             {% else %}
@@ -95,9 +94,32 @@
                     </tr>
                 {% endfor %}
             </table>
+
+            <h5 style="color: #fff;">Усі коментарі:</h5>
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Користувач</th>
+                    <th>Аніме</th>
+                    <th>Коментар</th>
+                    <th>Дата</th>
+                    <th>Дії</th>
+                </tr>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.user.nickname }}</td>
+                        <td>{{ comment.title.name }}</td>
+                        <td>{{ comment.comment }}</td>
+                        <td>{{ comment.date_of_creating.strftime("%H:%M %d/%m/%Y") }}</td>
+                        <td>
+                            <a href="/admin-panel/delete-comment/{{ comment.id }}">Видалити</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
         </div>
     </div>
-
-
 
 {% endblock %}

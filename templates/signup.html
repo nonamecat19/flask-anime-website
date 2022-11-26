@@ -6,7 +6,6 @@
 
 {% block body %}
 
-    <!-- Normal Breadcrumb Begin -->
     <section class="normal-breadcrumb set-bg"
              data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
         <div class="container">
@@ -20,9 +19,7 @@
             </div>
         </div>
     </section>
-    <!-- Normal Breadcrumb End -->
 
-    <!-- Signup Section Begin -->
     <section class="signup">
         <div class="container">
             <div class="row">
@@ -30,6 +27,9 @@
                 <div class="col-4">
                     <div class="login__form">
                         <h3>Створити акаунт</h3>
+                        {% if message %}
+                            <h5 style="color: #fff; margin: 10px 0; font-style: italic;">{{ message }}</h5>
+                        {% endif %}
                         <form method="post">
                             <div class="input__item">
                                 <label>
@@ -49,7 +49,7 @@
                                 </label>
                                 <span class="icon_lock"></span>
                             </div>
-                            <button type="submit" class="site-btn">Зареєструватися й увійти</button>
+                            <button type="submit" class="site-btn">Зареєструватися</button>
                         </form>
                         <h5>Вже маєте обліковий запис? <a href="./login">Увійти</a></h5>
                     </div>
@@ -58,7 +58,4 @@
             </div>
         </div>
     </section>
-    <!-- Signup Section End -->
-
-
 {% endblock %}

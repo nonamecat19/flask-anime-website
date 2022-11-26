@@ -22,14 +22,15 @@
 
     <div class="container">
         <div class="row" id="admin_page">
-            <h4 class="col-12">Вітаємо, {{ user.nickname }}</h4>
-            {% if not session['admin'] %}
-                <p class="col-10"><a href="/profile/delete/{{ user.id }}">Видалити акаунт</a></p>
-            {% endif %}
+            <form method="POST"  class="col-12">
+                <h4 class="text-left">Вітаємо, {{ user.nickname }}</h4>
+                <p class="text-left" style="color: #fff">Завдяки реєстрації ви можете писати коментарі під будь-яким аніме :D</p>
+                <button type="submit" style="width: max-content">Вийти з аккаунта</button>
+                {% if not session['admin'] %}
+                    <button style="background-color: #e53637; width: max-content"><a style="color: #fff" href="/profile/delete/{{ user.id }}">Видалити акаунт</a></button>
+                {% endif %}
+            </form>
         </div>
-        <form method="POST">
-            <button type="submit" class="logout">Вийти з аккаунта</button>
-        </form>
     </div>
 
 {% endblock %}

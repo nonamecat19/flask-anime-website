@@ -27,7 +27,7 @@
             <div class="col-lg-2">
                 <div class="header__logo">
                     <a href="./index">
-                        <img alt="" src="{{ url_for('static',filename = 'img/logo.jpg') }}">
+                        <img alt="" src="{{ url_for('static', filename = 'img/logo.png') }}">
                     </a>
                 </div>
             </div>
@@ -36,12 +36,12 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             <li><a href="/">Головна</a></li>
-                            {% if session.user %}
-                                <li><a href="/profile/{{ session.auth_id }}">Профіль</a></li>
-                            {% endif %}
                             <li><a href="/categories">Аніме по категоріях</a></li>
                             {% if not session.auth %}
                                 <li><a href="/login">Увійти</a></li>
+                            {% endif %}
+                            {% if session.user %}
+                                <li><a href="/profile/{{ session.auth_id }}">Профіль</a></li>
                             {% endif %}
                             {% if session.admin %}
                                 <li><a href="/admin-panel">Панель адміністратора</a></li>
