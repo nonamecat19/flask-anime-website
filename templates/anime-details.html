@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>{{title.name}}</title>
+    <title>{{ title.name }}</title>
 {% endblock %}
 
 {% block body %}
     <!-- Normal Breadcrumb Begin -->
-    <section class="normal-breadcrumb set-bg" data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg')}}">
+    <section class="normal-breadcrumb set-bg"
+             data-setbg="{{ url_for('static',filename = 'img/normal-breadcrumb.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -25,105 +26,108 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="/static/img/anime-posters/{{title.image_name}}">
-<!--                            <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
-<!--                            <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
+                        <div class="anime__details__pic set-bg"
+                             data-setbg="/static/img/anime-posters/{{ title.image_name }}">
+                            <!--                            <div class="comment"><i class="fa fa-comments"></i> 11</div>-->
+                            <!--                            <div class="view"><i class="fa fa-eye"></i> 9141</div>-->
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
-                                <h3>{{title.name}}</h3>
-                                <span>{{title.original_name}}</span>
+                                <h3>{{ title.name }}</h3>
+                                <span>{{ title.original_name }}</span>
                             </div>
                             <div class="anime__details__rating">
                                 <div class="rating">
-                                    {% for count in range(title.star_count): %}
+                                    {% for count in range(title.star_count) %}
                                         <a><i class="fa fa-star"></i></a>
                                     {% endfor %}
                                 </div>
                             </div>
-                            <p>{{title.description}}</p>
+                            <p>{{ title.description }}</p>
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Тип:</span>{{title.type}}</li>
-                                            <li><span>Дата виходу:</span>{{title.date_of_creating.date()}}</li>
-                                            <li><span>Статус:</span>{{title.status}}</li>
-                                            <li><span>Жанри:</span>{{title.genres}}</li>
+                                            <li><span>Тип:</span>{{ title.type }}</li>
+                                            <li><span>Дата виходу:</span>{{ title.date_of_creating.date() }}</li>
+                                            <li><span>Статус:</span>{{ title.status }}</li>
+                                            <li><span>Жанри:</span>{{ title.genres }}</li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Студія:</span>{{title.studio}}</li>
-                                            <li><span>Тривалість:</span>{{title.movie_length}}</li>
-                                            <li><span>Вподобання:</span>{{likes}}</li>
+                                            <li><span>Студія:</span>{{ title.studio }}</li>
+                                            <li><span>Тривалість:</span>{{ title.movie_length }}</li>
+                                            <li><span>Вподобання:</span>{{ likes }}</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="anime__details__btn">
-                                <p>Додати до свого списку це аніме як:</p>
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Улюблене</a>
-                                <a href="#" class="follow-btn">Заплановане</a>
-                                <a href="#" class="follow-btn">Просто переглянуте</a>
-                                <a href="#" class="follow-btn">Закинуте</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-8">
-                        <div class="anime__details__review">
-                            <div class="section-title">
-                                <h5>Коментарі</h5>
-                            </div>
-
-                            {# Component #}
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="{{url_for('static', filename='img/anime/review-1.jpg')}}" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            {# Component #}
-
-                        </div>
-                        <div class="anime__details__form">
-                            <div class="section-title">
-                                <h5>Ваш коментар</h5>
-                            </div>
-                            <form action="#">
-                                <label for="your_comment"></label>
-                                <textarea id="your_comment" placeholder="Ваш коментар"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Відправити коментар</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="anime__details__sidebar">
-                            <div class="section-title">
-                                <h5>Вам також сподобається...</h5>
-                            </div>
-
-                            {% for title in trends%}
-                            <div class="product__sidebar__view__item set-bg" data-setbg="/static/img/anime-posters/{{title.image_name}}">
-                                <div class="ep">{{title.age_restriction}}</div>
-                                <div class="view"><i class="fa fa-star"></i>{{title.star_count}}</div>
-                                <h5><a href="/anime-details/{{title.id}}">{{title.name}}</a></h5>
-                            </div>
-                            {% endfor %}
-
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Anime Section End -->
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="anime__details__review">
+                        <div class="section-title">
+                            <h5>Коментарі</h5>
+                        </div>
+
+                        {# Component #}
+                        <div class="anime__review__item">
+                            <div class="anime__review__item__pic">
+                                {# Можна використатовувати одну картинку #}
+                                <img src="{{ url_for('static', filename='img/anime/review-1.jpg') }}" alt="">
+                            </div>
+                            <div class="anime__review__item__text">
+                                {# Час можна прибрати якщо це запарно #}
+                                <h6>Chris Curry - <span>1 Hour ago</span></h6>
+                                <p>whachikan Just noticed that someone categorized this as belonging to the genre
+                                    "demons" LOL</p>
+                            </div>
+                        </div>
+                        {# Component #}
+
+                    </div>
+                    <div class="anime__details__form">
+                        <div class="section-title">
+                            <h5>Ваш коментар</h5>
+                        </div>
+                        <form action="#">
+                            <label for="your_comment"></label>
+                            <textarea id="your_comment" placeholder="Ваш коментар"></textarea>
+                            {% if session['auth'] %}
+                                <button type="submit"><i class="fa fa-location-arrow"></i> Відправити коментар</button>
+                            {% else %}
+                                <a href="./login">
+                                    <button type="button"><i class="fa fa-location-arrow"></i>Увійти в аккаунт</button>
+                                </a>
+                            {% endif %}
+                        </form>'
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="anime__details__sidebar">
+                        <div class="section-title">
+                            <h5>Вам також сподобається...</h5>
+                        </div>
+
+                        {% for title in trends %}
+                            <div class="product__sidebar__view__item set-bg"
+                                 data-setbg="/static/img/anime-posters/{{ title.image_name }}">
+                                <div class="ep">{{ title.age_restriction }}</div>
+                                <div class="view"><i class="fa fa-star"></i>{{ title.star_count }}</div>
+                                <h5><a href="/anime-details/{{ title.id }}">{{ title.name }}</a></h5>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Anime Section End -->
 {% endblock %}
