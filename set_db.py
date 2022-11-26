@@ -1,4 +1,4 @@
-from app import db, Title
+from app import db, Title, Category, User
 
 db.session.add(Category(name="Новинки"))
 db.session.add(Category(name="Популярні"))

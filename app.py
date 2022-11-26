@@ -1,11 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
+# тут має бути дуже складний секретний ключ для сесій
+app.config['SECRET_KEY'] = '1111'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 db = SQLAlchemy(app)
-
 
 class Category(db.Model):
     __tablename__ = "category"
@@ -106,11 +107,22 @@ def blog():
 def login():
     message = ""
     if request.method == "POST":
+
         users = User.query.all()
         if users[0].login == request.form['user-login'] and users[0].password == request.form['user-password']:
+            # дані передаються в сесію
+            session['admin'] = True
+            session['user'] = False
+            session['auth'] = True
+            session['auth_id'] = '1'
             return redirect("/admin-panel")
         for user in users:
             if user.login == request.form['user-login'] and user.password == request.form['user-password']:
+                # дані передаються в сесію
+                session['user'] = True
+                session['admin'] = False
+                session['auth'] = True
+                session['auth_id'] = str(user.id)
                 return redirect("/profile/" + str(user.id))
         message = "Неправильно введений логін чи пароль"
     return render_template('login.html', message=message)
@@ -242,8 +254,21 @@ def category_updating(id):
     return render_template('update-category.html', category=category)
 
 
-@app.route('/profile/<int:id>')
+@app.route('/profile/<int:id>', methods=["POST", "GET"])
 def profile(id):
+    # перевірка чи користувач входить саме до свого профілю
+    # print(f"{int(session['auth_id'])} -- {int(id)} -- {int(session['auth_id']) != int(id)}")
+    if int(session['auth_id']) != int(id):
+        # редірект на іншу сторінку якщо хоче до чужого
+        return redirect('/')
+
+    # натиснута кнопка вийти з аккаунта
+    if request.method == "POST":
+        # очищається сесія від даних
+        session.clear()
+        # редірект на головну
+        return redirect('/')
+        
     user = User.query.get_or_404(id)
     return render_template('profile.html', user=user)
 
@@ -254,7 +279,7 @@ def profile_deleting(id):
     try:
         db.session.delete(user)
         db.session.commit()
-        return redirect('/')
+        return redirect()
     except Exception as ex:
         return str(ex)
 

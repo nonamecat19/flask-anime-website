@@ -35,16 +35,27 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li><a href="/">Головна</a></li>
+                                {% if session.user %}
+                                    <li><a href="/profile/{{ session.auth_id }}">Профіль</a></li>
+                                {% endif %}
                                 <li><a href="/categories">Аніме по категоріях</a></li>
-                                <li><a href="/login">Увійти</a></li>
-                                <li><a href="/admin-panel">Панель адміністратора</a></li>
+                                {% if not session.auth %}
+                                    <li><a href="/login">Увійти</a></li>
+                                {% endif %}
+                                {% if session.admin %}
+                                    <li><a href="/admin-panel">Панель адміністратора</a></li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="/profile"><span class="icon_profile"></span></a>
+                        {% if session.auth %}
+                            <a href="/profile/{{ session.auth_id }}"><span class="icon_profile"></span></a>
+                        {% else %}
+                            <a href="/login"><span class="icon_profile"></span></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

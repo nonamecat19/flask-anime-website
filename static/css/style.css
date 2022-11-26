@@ -2357,3 +2357,10 @@ ol {
 #admin_page button{
     self-align: center;
 }
+
+
+.logout{
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
